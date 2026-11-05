@@ -1,8 +1,6 @@
 import socket
 import threading
 
-from click import command
-
 bind_ip = "0.0.0.0"
 bind_port = 9001
 
@@ -17,11 +15,12 @@ dictionary = {}
 
 commands = ["PING", "ECHO", "SET", "GET"]
 
+
 def handle_client(client_socket):
     try:
         partial_data = ""
         while True:
-            
+
             data = client_socket.recv(1024)
 
             # Client disconnected
@@ -33,7 +32,7 @@ def handle_client(client_socket):
             print(f"[+] Received data: {data.strip()}")
 
             if "\n" in partial_data:
-                
+
                 data = partial_data.strip().split("\n")
                 partial_data = ""
                 for command in data:
